@@ -3,7 +3,7 @@ layout: list
 title: Computer Science
 slug: cs
 menu: true
-order: 1
+order: 2
 description: >
   Computer Science 개념을 정리하는 공간입니다 ^0^
 accent_color: rgb(38,139,210)
