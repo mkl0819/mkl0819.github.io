@@ -49,11 +49,13 @@ author:
 # Add links to the sidebar.
 menu:
   - title:             Algorithm
-    url:               /category/algo/
+    url:               /algo/
   - title:             Computer Science
-    url:               /category/cs/
+    url:               /cs/
   - title:             Project
-    url:               /category/project/
+    url:               /project/
+  - title:             Hyde
+    url:               /hyde/
   - title:             Documentation
     url:               /docs/
   - title:             About
