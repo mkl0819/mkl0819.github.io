@@ -54,6 +54,8 @@ menu:
     url:               /cs/
   - title:             Project
     url:               /project/
+  - title:             AI
+    url:               /AI/  
   - title:             Hyde
     url:               /hyde/
   - title:             Documentation
