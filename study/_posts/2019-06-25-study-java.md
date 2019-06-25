@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [1학기정리]1주차_JAVA
+title: 1학기정리_1주차_JAVA
 description: >
     1학기 내용정리 스터디 _ 1주차 _ JAVA
 excerpt_separator: <!--more-->
