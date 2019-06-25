@@ -56,10 +56,10 @@ menu:
     url:               /project/
   - title:             AI
     url:               /ai/
-  - title:             Hyde
-    url:               /hyde/
-  - title:             Documentation
-    url:               /docs/
+  - title:             Big Data
+    url:               /bigdata/
+#  - title:             Documentation
+#    url:               /docs/
   - title:             About
     url:               /about/
 
