@@ -58,6 +58,8 @@ menu:
     url:               /ai/
   - title:             Big Data
     url:               /bigdata/
+  - title:             STUDY
+    url:               /study/
 #  - title:             Documentation
 #    url:               /docs/
   - title:             About
