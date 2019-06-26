@@ -47,6 +47,7 @@ Class를 실체화 한 것이 `객체`.
 - 상속성 (Top-down): 부모클래스의 속성, 메소드를 자식클래스에 `물려주는 것`
   - **is a** 관계   
 
+
 ``` java
 Class cup<T> {}
 cup<water> watercup = new cup<water>();
@@ -58,6 +59,7 @@ cup<soju> watercup = new cup<soju>();
 #### 4. 다형성 Polymorphism
 - Override
   - 부모 클래스의 메소드를 자식클래스에서 `재정의`하는 것   
+
 ``` java
 interface animal{
   String cry();
@@ -72,6 +74,7 @@ class cat implements animal{
 
 - Overload
   - 매개변수의 타입과 개수가 다르면 같은 이름의 메소드(리턴타입 같음)를 사용할 수 있음   
+
 ```java
 int sum(int a, int b){
   return a + b;
