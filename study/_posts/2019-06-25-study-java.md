@@ -11,9 +11,9 @@ excerpt_separator: <!--more-->
 ## Obejct Oriented Programming
 
 ### Class
-객체의 틀.
-Class를 실체화 한 것이 `객체`.
-객체를 실체화 한 것이 `인스턴스`.
+객체의 틀. </br>
+Class를 실체화 한 것이 `객체`. </br>
+객체를 실체화 한 것이 `인스턴스`. </br>
 
 ### JAVA의 4가지 특징
 
