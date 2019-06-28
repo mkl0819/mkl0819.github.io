@@ -41,6 +41,24 @@ Class를 실체화 한 것이 `객체`.
 |상속 관계|X|X|O|O|
 |다른 패키지|X|X|X|O|
 
+- 그 외
+  - **static**   
+    - 변수, 메소드, 내부클래스 (외부클래스 X)   
+    - 클래스의 변수
+    - static 메소드는 static 변수만 가져다 쓸 수 있음 (외부에 있는 변수 중)  
+  - **final**
+    - 클래스 : 상속불가 (String X)
+    - 메소드 : Override X
+    - 변수 : 상수
+  - **abstract**
+    - 추상 메소드를 적어도 한 개 가지고 있는 클래스
+    - 구현된 메소드가 존재할 수 있음
+    - |abstract|interface|   
+      |:---:|:---:|   
+      |기능을 확장시키는 목적|같은 동작을 보장(강제)하기 위한 목적|   
+
+
+
 
 #### 3. 일반화 Generalization (상속성)
 - 일반화 (Bottom-up) : 여러 개념에서 공통된 개념을 찾아 `일반화`하여 묶는 것
@@ -58,6 +76,21 @@ cup<soju> watercup = new cup<soju>();
 
 
 #### 4. 다형성 Polymorphism
+- Casting
+
+
+``` java
+class animal{
+
+}
+class cat extends animal {
+
+}
+public static void main(String[] args){
+    animal a = new cat();
+//  cat c = new animal();    자식은 부모로 캐스팅할 수 없습니다.
+}
+```  
 - Override
   - 부모 클래스의 메소드를 자식클래스에서 `재정의`하는 것   
 
@@ -76,10 +109,10 @@ class cat implements animal{
 ```
 
 - Overload
-  - 매개변수의 타입과 개수가 다르면 같은 이름의 메소드(리턴타입 같음)를 사용할 수 있음    
+  - 매개변수의 타입과 개수가 다르면 같은 이름의 메소드를 사용할 수 있음    
+  - 매개변수의 타입과 개수가 같을 경우에는 리턴타입은 하나만 존재할 수 있음
 
 
-  
 ```java
 int sum(int a, int b){
   return a + b;
