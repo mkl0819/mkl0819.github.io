@@ -111,19 +111,6 @@ public class HelloServlet extends HttpServlet {
 
 ```
 
-**web.xml 파일**
-``` xml
-<servlet>
-  <servlet-name>HelloServlet</servlet-name>
-  <servlet-class>com.ssafy</servlet-class>
-</servlet>
-<servlet-mapping>
-  <servlet-name>HelloServlet</servlet-name>
-  <url-pattern>/hello</url-pattern>
-</servlet-mapping>
-
-```
-
 ### Forward vs Include vs Redirect
 
   1. Forward    
@@ -133,6 +120,71 @@ public class HelloServlet extends HttpServlet {
   3. Redirect
     : 요청에 따른 응답 `URL`을 클라이언트에게 전달하고 클라이언트는 다시 `요청`
 
+### 서블릿 설정
+
+####  `ServletConfig`
+
+* 서블릿이 초기화 시 환경 정보를 서블릿으로 전달할 때 사용하는 객체
+* 서블릿 당 하나의 ServletConfig 객체가 생성
+* 초기파라미터 정보를 가져올 수 있게 해주는 메소드 제공
+```java
+String id = null;
+public void init(){
+  ServletConfig conf = getServletConfig();
+  id = conf.getInitParameter("id");
+}
+```
+
+`web.xml`
+``` xml
+<servlet>
+  <servlet-name>HelloServlet</servlet-name>
+  <servlet-class>com.ssafy</servlet-class>
+  <init-param>
+    <param-name>id</param-name>
+    <param-value>ming</param-value>
+  </init-param>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>HelloServlet</servlet-name>
+  <url-pattern>/hello</url-pattern>
+</servlet-mapping>
+```
+
+
+### ServletContext
+
+#### `ServletContext`
+* 웹 애플리케이션내의 서블릿/JSP의 자원 공유를 위한 객체
+* 웹 애플리케이션 당 하나의 ServletContext 객체가 생성
+* Servlet이 실행되는 환경이나 서버 자원 관련 정보 또는 로그 파일을 기록하는 작업 관련 메소드를 제공
+```java
+Servletcontext context = getservletContext();
+String id = context.getInitParameter("id");
+InputStream is = null;
+BufferedReader br = null;
+try {
+  is = context.getResourceAsStream(id);
+  br = new BufferedReader(new InputStreamReader(is));
+}
+```
+`web.xml`
+``` xml
+<servlet>
+  <servlet-name>HelloServlet</servlet-name>
+  <servlet-class>com.ssafy</servlet-class>
+  <init-param>
+    <param-name>id</param-name>
+    <param-value>ming</param-value>
+  </init-param>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>HelloServlet</servlet-name>
+  <url-pattern>/hello</url-pattern>
+</servlet-mapping>
+```
 
 ## JSP (Java Server Page)
 `java` 코드가 들어간 `html` 코드
@@ -140,7 +192,7 @@ public class HelloServlet extends HttpServlet {
 * 기존 Servlet에서 html 코드 작성의 불편함
 * 개발자가 작성한 JSP 파일은 `Servlet`파일로 변환됨
 
-```java
+```HTML
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%!
@@ -169,7 +221,193 @@ public class HelloServlet extends HttpServlet {
 ```
 
 
+### JSP 태그
+
+|스크립팅 요소|| 설명
+|:---:|:---:|:---|
+<%@  %> | 디렉티브 | 현재의 JSP 페이지 자체에서의 기능</br> page, include, taglib
+<%!  %> | 선언 | **멤버** 변수/메소드 선언
+<%   %> | 스크립트릿 | 코드 구현</br> Servlet의 service() 메소드에 구현 -> **local** 변수
+<%=  %> |표현식|간단한 데이터 출력</br> 세미콜론 없음
+
+### JSP scope
+scope|기본객체|생성|소멸
+:---:|:---:|:---|:---
+PAGE|PAGEcONTEXT|JSP 페이지 시작|완료
+REQUEST|request|웹 브라우저 요청|응답
+SESSION|session|웹 브라우저|세션 타이머 만료</br> 명시적 종료 시점
+APPLICATION|application|Tomcat서버 구동|종료
+
+### JSP 액션 태그
+
+* jsp:forward
+  * 같은 웹 애플리케이션 내부에 존재하는 페이지에만 접근 가능 ( sendRedirect()와 다름 )
+```HTML
+<jsp:forward page = "forward/paramTo.jsp">
+<jsp:param name="name" value="value" />
+</jsp:forward>
+```   
+
+
+* jsp:include
+  * 파일을 삽입하는 것이 아닌 요청 처리 흐름을 이동하는 것 ( <%@  %> 태그와 다름)
+```HTML
+<jsp:include page="include/sub.jsp" flush="false" />
+```
+
+### JavaBeans
+
+**객체 클래스**
+```java
+public class User implements java.io.Serivalizable {
+  private String id;
+  private String pw;
+  // 기본 생성자 필요
+  public User() {}
+
+  // getter, setter 메소드 필요
+  public String getId(){
+    return id;
+  }
+  public void setId(String id){
+    this.id = id;
+  }
+  public String getPw(){
+    return pw;
+  }
+  public void setPw(String pw){
+    this.pw = pw;
+  }
+}
+```
+
+**javaBean 사용**
+```HTML
+<!-- 객체 생성 -->
+<jsp:useBean id="user" class="ming.User" />
+
+<jsp:setProperty name="user" property="id" value="value" />
+
+<jsp:getProperty name="user" property="pw" />
+
+```
+
+## JSTL & EL
+
+### JSTL ( Java Standard Tag Library)
+* 커스텀 태그 라이브러리 모음
+
+### EL ( Expression Language )
+
+* page < request < session < application 순서로 해당 이름의 객체를 탐색하여 사용
+* 연산도 가능
+
+```HTML
+${user.id}  
+${user.pw}
+```  
+
+
+
+**core 라이브러리**
+
+```HTML
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp.jstl.core" %>
+
+<!-- 변수 -->
+<c:out value="${user.id}" />
+<c:set var="${user.id}" scope="request" value="ming" />
+<c:remove var="${user.id}" scope="request" />
+
+<!-- 에러 처리 -->
+<c:catch var="errmsg" >
+  <%= 100/0 %>
+</c:catch>
+<c:out value="${errmsg}" />
+
+<!-- 조건문  -->
+<c:choose>
+  <c:when test="${user.id}=='ming'"> body </c:when>
+  <c:otherwise> body </c:otherwise>
+</c:choose>
+
+<!-- 반복문 -->
+<c:forEach begin="0" end="3" var="idx">
+  <c:out value="${idx}" />
+</c:forEach>
+
+<c:forTokens items="lee:m:k" delims=":" var="token">
+  <c:out value="${token}" />
+</c:forTokens>
+```
+
+## Cookie :cookie:
+```java
+public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  // Cookie 가져오기
+  Cookie[] coo = request.getCookies();
+  if(coo != null && coo.length > 0){
+    for (int i=0; i<coo.length; i++){
+      out.println(coo[i].getName() + URLDecoder.decode(coo[i].getValue()));
+    }
+  }
+
+  // Cookie 생성
+  Cookie cookie = new Cookie("name", URLEncoder.encode("쿠키"));
+  // Cookie 유효시간 설정
+  cookie.setMaxAge(365*24*3600);
+  // Cookie 내보내기
+  response.addCookie(Cookie);
+}
+```
+
+## Session
+
+1. 클라이언트가 특정 도메인에 요청
+2. 서버는 접속한 클라이언트에 대한 세션 ID를 생성하고 값을 저장
+3. 서버는 세션 ID와 함께 클라이언트에 응답
+4. 클라이언트는 세션 ID를 브라우저에 쿠키로 저장 (sessionId)
+5. 클라리언트가 도메인에 재요청 시 저장된 sessionId를 서버에 제출
+6. 서버는 받은 sessionId로 클라이언트 구별
+
+```java
+public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  // Session 생성
+  HttpSession session = request.getSession(true);
+
+  // Session이 처음 생성된 것인지 판단
+  if(session.isNew()){
+    // 타임아웃 시간 설정
+    session.setMaxInactiveInterval(1200);
+  } else {
+    out.println(new Date(session.getCreationTime()));
+    out.println(new Date(session.getLastAccessedTime()));
+    out.println(session.getMaxInactiveInterval());
+  }
+}
+```
+
 ## MVC
+> **웹 애플리케이션 모델**
+> 웹 애플리케이션을 개발할 때 일반저기으로 많은 개발자들이 사용하는 표준화된 아키텍쳐  
+
+![study-servlet-02](/assets/study-servlet-02.png)
+
+### Model1 vs Model2
+* Model1은 jsp가 컨트롤러 역할
+* Model2는 servlet이 컨트롤러 역할
+
+## 프레임 워크
+* 웹 애플리케이션의 기능과 구조를 구현하여 제공하고 있는 것
+* 장점
+  * 개발기간 단축
+  * 견고성
+  * 유지보수성 향상
+* 단점
+  * 프레임워크 학습
+  * 프레임워크 선택
+  * 유연성 부족
+
 
 
 ## MVVM
