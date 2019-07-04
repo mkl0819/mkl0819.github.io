@@ -23,11 +23,12 @@ excerpt_separator: <!--more-->
 HTTP 프로토콜 기반  
 클라이언트 요청을 처리하는 곳  
 HTML, 이미지, CSS, JavaScript를 웹 브라우저에 제공  
+정적인 컨텐츠를 제공
 
 
 #### 웹 애플리케이션 서버 (WAS)
 페이지의 로직 수행 및 데이터베이스 연동  
-웹 서버 / 컨테이너
+웹 서버 / 컨테이너 (동적인 컨텐츠)
 ex) Apache Tomcat
 
 #### 데이터베이스
@@ -169,7 +170,7 @@ try {
   br = new BufferedReader(new InputStreamReader(is));
 }
 ```
-  
+
 `web.xml`  
 
 ``` xml
