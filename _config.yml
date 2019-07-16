@@ -60,7 +60,7 @@ menu:
   #   url:                /bigdata/
   - title:                STUDY
     url:                  /study/
-  - title:                JAVA SCRIPT
+  - title:                JAVASCRIPT
     url:                  /javascript/
 #  - title:               Documentation
 #    url:                 /docs/

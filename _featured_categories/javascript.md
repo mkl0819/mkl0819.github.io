@@ -1,6 +1,6 @@
 ---
 layout: list
-title: JAVA SCRIPT
+title: JAVASCRIPT
 slug: javascript
 menu: true
 order: 1
