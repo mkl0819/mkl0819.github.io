@@ -65,7 +65,6 @@ public class WorkService {
   }
 }
 
-
 public class BasicApp {
   public static void main(String ar[]){
     WorkService workService = new WorkService();
@@ -114,7 +113,6 @@ public class BasicApp {
 
 </beans>
 ```
-
 
 ```java
 package info.thecodinglive.xmlConfig;
