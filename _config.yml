@@ -62,6 +62,10 @@ menu:
     url:                  /study/
   - title:                JAVASCRIPT
     url:                  /javascript/
+  - title:                PYTHON
+    url:                  /python/
+  - title:                VUE.JS
+    url:                  /vue/
 #  - title:               Documentation
 #    url:                 /docs/
   - title:                About
