@@ -30,7 +30,7 @@ excerpt_separator: <!--more-->
 #### 4. 클래스 언로딩 불가능
 * GC가 동작하거나 WAS가 재시작할 때 초기화
 
-![study-spring-01](/assets/study-spring-01.png)
+![study-spring-01](../img/study-spring-01.png)
 |||
 |:---:|:---|
 Bootstrap Class Loader|JVM 런타임 실행을 위해 기반이 되는 파일 로드   </br>  `rt.jar` 파일과 연관

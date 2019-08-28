@@ -207,7 +207,7 @@ try {
 
 ## Thread
 ### Process vs Thread
-![study-java-01](/assets/study-java-01.png)
+![study-java-01](../img/study-java-01.png)
 
 ### Multi Thread
 ```java

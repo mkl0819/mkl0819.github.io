@@ -83,7 +83,7 @@ public class BasicApp {
 }
 ```
 ### 2. Spring XML 코드
-![study-spring-03](/assets/img/posts/study-spring-03.png)
+![study-spring-03](../img/study-spring-03.png)
 
 #### 2.1 스프링 라이브러리 추가
 #### 2.2 스프링 applicationContext.xml 설정
@@ -250,7 +250,7 @@ public void onDestroyed(){
 > Front Controller 패턴에 Spring의 의존성 주입을 이용해 컴포넌트들의 생명주기를 관리할 수 있는
 > 컨트롤러 중심의 웹 MVC 프레임워크
 
-![study-spring-04](/assets/img/posts/study-spring-04.png)
+![study-spring-04](../img/study-spring-04.png)
 1. `Dispatcher Servlet`이 요청을 받으면
 2. 그 요청을 처리할 수 있는 `Handler`의 이름을 `HandlerMapping`에게 물어봄
 3. `HandlerMapping`은 요청 URL을 보고 `Handler`를 판단하고 `Handler` 실행 전에 전처리, 후처리 해야할 `인터셉터` 목록을 결정

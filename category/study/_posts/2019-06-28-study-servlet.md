@@ -46,7 +46,7 @@ ex) Apache Tomcat
 
 
 ### Servlet 동작 방식
-![study-servlet-01](/assets/study-servlet-01.png)
+![study-servlet-01](../img/study-servlet-01.png)
 
 1. 클라이언트가 요청한 `HTTP Request`를 `Servlet Container`로 전송
 2. Servlet Container에서 `HttpServletRequest`, `HttpServletResponse` 두 객체를 생성
@@ -394,7 +394,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response) thr
 > **웹 애플리케이션 모델**
 > 웹 애플리케이션을 개발할 때 일반저기으로 많은 개발자들이 사용하는 표준화된 아키텍쳐  
 
-![study-servlet-02](/assets/study-servlet-02.png)
+![study-servlet-02](../img/study-servlet-02.png)
 
 ### Model1 vs Model2
 * Model1은 jsp가 컨트롤러 역할
