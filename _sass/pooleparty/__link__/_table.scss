@@ -37,7 +37,7 @@ table:not(.highlight) {
   
   thead {
     @extend .color-transition;
-    background-color: var(--body-bg);
+    background-color: #0000000d;
   }
 
   thead + tbody,
@@ -56,7 +56,7 @@ table:not(.highlight) {
   tbody tr:nth-child(odd) td,
   tbody tr:nth-child(odd) th {
     @extend .color-transition;
-    background-color: var(--gray-bg);
+    // background-color: var(--gray-bg);
   }
   
 }

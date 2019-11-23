@@ -47,14 +47,8 @@ author:
 menu:
   - title:                Algorithm
     url:                  /algo/
-  # - title:              Computer Science
-  #   url:                /cs/
-  # - title:              Project
-  #   url:                /project/
-  # - title:              AI
-  #   url:                /ai/
-  # - title:              Big Data
-  #   url:                /bigdata/
+  - title:                Network
+    url:                  /network/
   - title:                STUDY
     url:                  /study/
   - title:                JAVASCRIPT
