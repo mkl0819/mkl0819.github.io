@@ -112,6 +112,7 @@ const HEADING_SELECTOR = "h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]";
 function upgradeHeading(h) {
   const df = importTemplate("_permalink-template");
   const a = df.querySelector(".permalink");
+  console.log(h.id)
   requestAnimationFrame(() => ((a.href = `#${h.id}`), h.appendChild(df)));
 }
 
