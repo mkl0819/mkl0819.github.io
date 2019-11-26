@@ -15,7 +15,7 @@ del {
     background-color: #ffe123a6;
 }
 
-@media screen and (min-width: $break-point-5) {
+@media screen and (min-width: 95em) {
     .post-nav-list {
         width: 300px;
         padding: 15px;
@@ -52,7 +52,7 @@ del {
     }
 }
 
-@media (max-width: $break-point-5) {
+@media (max-width: 95em) {
     .post-nav-list, .post-nav-list * {
         display: none;
     }
