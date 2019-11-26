@@ -1,6 +1,8 @@
 ---
 layout: post
 title: 게시글 네비게이션 바 만들기
+description: >
+  블로그 네비게이션 바를 만들면서 느낀 점
 excerpt_separator: <!--more-->
 
 ---
