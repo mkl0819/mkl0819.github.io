@@ -27,74 +27,75 @@ excerpt_separator: <!--more-->
 우리가 작성한 포스트는 `post.html`에서 구성이 된다.
      
      
-    
+{% raw %}    
 ``` html
-{_% assign post          = include.post          %}
-{_% assign no_link_title = include.no_link_title %}
-{_% assign no_excerpt    = include.no_excerpt    %}
-{_% assign hide_image    = include.hide_image    %}
+{% assign post          = include.post          %}
+{% assign no_link_title = include.no_link_title %}
+{% assign no_excerpt    = include.no_excerpt    %}
+{% assign hide_image    = include.hide_image    %}
 
-<article id="post{_{ post.id | replace:'/','-' }}" class="page post mb6" role="article">
+<article id="post{{ post.id | replace:'/','-' }}" class="page post mb6" role="article">
   <header>
     <h1 class="post-title">
-      {_% unless no_link_title %}<a href="{_{ post.url | relative_url }}" class="flip-title">{_% endunless %}
-        {_{ post.title }}
-      {_% unless no_link_title %}</a>{_% endunless %}
+      {% unless no_link_title %}<a href="{{ post.url | relative_url }}" class="flip-title">{% endunless %}
+        {{ post.title }}
+      {% unless no_link_title %}</a>{% endunless %}
     </h1>
 
     <p class="post-date heading">
-      {_% assign post_format = site.data.strings.date_formats.post | default:"%d %b %Y" %}
-      <time datetime="{_{ post.date | date_to_xmlschema }}">{_{ post.date | date:post_format }}</time>
-      {_% assign category_start     = site.data.strings.category_start     | default:"in " %}
-      {_% assign tag_start          = site.data.strings.tag_start          | default:"on " %}
-      {_% assign category_separator = site.data.strings.category_separator | default:" / " %}
-      {_% assign tag_separator      = site.data.strings.tag_separator      | default:", "  %}
-      {_% include components/tag-list.html tags=post.categories meta=site.featured_categories start_with=category_start separator=category_separator %}
-      {_% include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
+      {% assign post_format = site.data.strings.date_formats.post | default:"%d %b %Y" %}
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date:post_format }}</time>
+      {% assign category_start     = site.data.strings.category_start     | default:"in " %}
+      {% assign tag_start          = site.data.strings.tag_start          | default:"on " %}
+      {% assign category_separator = site.data.strings.category_separator | default:" / " %}
+      {% assign tag_separator      = site.data.strings.tag_separator      | default:", "  %}
+      {% include components/tag-list.html tags=post.categories meta=site.featured_categories start_with=category_start separator=category_separator %}
+      {% include components/tag-list.html tags=post.tags meta=site.featured_tags start_with=tag_start separator=tag_separator %}
     </p>
 
-    {_% assign alt = false %}
-    {_% unless hide_image %}{_% if post.image %}
+    {% assign alt = false %}
+    {% unless hide_image %}{% if post.image %}
       <div class="img lead sixteen-nine">
-        {_% include components/hy-img.html img=post.image alt=post.title %}
+        {% include components/hy-img.html img=post.image alt=post.title %}
       </div>
-      {_% assign alt = '' %}
-    {_% endif %}{_% endunless %}
+      {% assign alt = '' %}
+    {% endif %}{% endunless %}
 
-    {_% include components/message.html text=post.description hide=page.hide_description alt=alt %}
+    {% include components/message.html text=post.description hide=page.hide_description alt=alt %}
   </header>
 
-  {_% if no_excerpt %}
-    {_{ post.content }}          // 우리가 작성한 markdown 파일
-  {_% else %}
-  {_{ post.excerpt }}
-  {_% capture post_title %}<a class="heading flip-title" href="{_{ post.url | relative_url }}">{_{ post.title }}</a>{_% endcapture %}
-  {_% assign text = site.data.strings.continue_reading | default:"Continue reading <!--post_title-->" %}
+  {% if no_excerpt %}
+    {{ post.content }}          // 우리가 작성한 markdown 파일
+  {% else %}
+  {{ post.excerpt }}
+  {% capture post_title %}<a class="heading flip-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>{% endcapture %}
+  {% assign text = site.data.strings.continue_reading | default:"Continue reading <!--post_title-->" %}
   <footer>
     <p class="read-more">
-      {_{ text | replace:"<!--post_title-->", post_title }}
+      {{ text | replace:"<!--post_title-->", post_title }}
     </p>
   </footer>
-  {_% endif %}
+  {% endif %}
 </article>
 ```
+{% endraw %}
 위의 코드는 `post.html`이다.   
 
 
 ![article2](../img/0303.png) 
 ![article3](../img/0302.png)
-`{_% if no_excerpt %}` 코드를 기준으로 `<article>` 태그는 **포스팅 하나의 상세 페이지**를 나타내거나 **포스팅 목록의 미리보기** 부분을 나타낸다.
+{% raw %}`{% if no_excerpt %}`{% endraw %} 코드를 기준으로 `<article>` 태그는 **포스팅 하나의 상세 페이지**를 나타내거나 **포스팅 목록의 미리보기** 부분을 나타낸다.
 
-**포스팅 하나의 상세 페이지**는 `{_% if no_excerpt %}`일 경우이고 해당 `markdown` 파일은 변환기를 거쳐서 `{_{post.content}}` 에 들어가는 것으로 보인다.
+**포스팅 하나의 상세 페이지**는 {% raw %}`{% if no_excerpt %}`{% endraw %}일 경우이고 해당 `markdown` 파일은 변환기를 거쳐서 {% raw %}`{{post.content}}`{% endraw %} 에 들어가는 것으로 보인다.
 
 
 이를 통해 알아낸 것은   
 1. post.html 에서 작업해야 함
-2. `{_% if no_excerpt %}` 일 때만 나오게 해야 함
+2. {% raw %}`{% if no_excerpt %}`{% endraw %} 일 때만 나오게 해야 함
 3. 만만치 않을 것임
 
 ### 1. 실패쓰1
-
+{% raw %}
 ```javascript
 function upgradeHeading(h) {
     const df = importTemplate("_permalink-template");
@@ -103,6 +104,7 @@ function upgradeHeading(h) {
   requestAnimationFrame(() => ((a.href = `#${h.id}`), h.appendChild(df)));
 }
 ```
+{% endraw %}
 `push-state.js` 파일에 보면 `upgradeHeading` 함수가 변환된 md 파일의 `header` 태그에 링크기능을 추가해준다.   
 나도 이 파일을 활용해서 해보려고 했지만 나의 너무나도 작고 소중한 역량때문에 성공하지 못했다.   
 
@@ -110,22 +112,24 @@ function upgradeHeading(h) {
 
 두 번째 생각한 것은   
 `post.html` 파일처럼 `post-nav-list.html` 파일을 만들어서   
-
+{% raw %}
 ```javascript
-  {_% if no_excerpt %}
-    {_{ post.content }}
-    {_%  include.post-nav-list.html post=post.content %}          
-  {_% else %}
+  {% if no_excerpt %}
+    {{ post.content }}
+    {%  include.post-nav-list.html post=post.content %}          
+  {% else %}
 ```
+{% endraw %}
 **post.html**
-
+{% raw %}
 ```javascript
-{_% assign post = include.post %}
+{% assign post = include.post %}
 
 <div class="post-nav-list">
-    {_{post.content}}
+    {{post.content}}
 </div>
 ```
+{% endraw %}
 **post-nav-list.html**
 
 이렇게 `post-nav-list.html` 파일에 md 파일 내용을 넘기고 **css**를 이용해서 만들었다.   
@@ -141,7 +145,7 @@ function upgradeHeading(h) {
 
 아무리 생각해도 비효율적이고 무식한 방법이라는 생각이 들었고   
 `post.html`에서 `script` 태그를 통해 해결하고자 했다.   
-
+{% raw %}
 ```javascript
 <script>
     var pushStateEl = document.getElementsByTagName('hy-push-state')[0];
@@ -165,6 +169,7 @@ function upgradeHeading(h) {
     pushStateEl.appendChild(postNavList);
 </script>
 ```
+{% endraw %}
 >**pushStateEl**   
 >- `article`의 부모인 `main` 태그와 동급에 위치해야된다고 생각했기 때문에 이들의 부모인 `hy-push-state`태그를 불러옴 
 >
